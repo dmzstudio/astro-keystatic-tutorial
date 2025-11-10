@@ -1,0 +1,21 @@
+---
+import Markdoc from "@markdoc/markdoc";
+import Layout from "../layouts/Layout.astro";
+import { reader } from "../utils/keystatic";
+
+const page = await reader.collections.pages.read("home");
+
+if (!page) {
+   throw new Error("Page not found");
+}
+
+const content = await page.content();
+const contentHtml = Markdoc.renderers.html(Markdoc.transform(content.node));
+---
+
+<Layout title={page.title}>
+   <div class="page">
+      <h1 class="page__title">{page.title}</h1>
+      <div class="page__content" set:html={contentHtml} />
+   </div>
+</Layout>

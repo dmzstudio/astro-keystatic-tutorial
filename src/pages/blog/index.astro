@@ -1,0 +1,111 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+
+const allPosts = await getCollection("posts");
+---
+
+<Layout title="Keystatic & Astro's Content Collections">
+   <div class="blog-index">
+      <h1 class="blog-index__title">Blog</h1>
+      <p class="blog-index__lead">
+         A collection of fine articles on various topics.
+      </p>
+
+      <div class="blog-index__posts">
+         {
+            allPosts.map((post) => (
+               <div class="blog-post">
+                  <div class="blog-post__cover">
+                     {post.data.cover ? (
+                        <Image
+                           src={post.data.cover}
+                           alt={post.data.title}
+                           width={320}
+                           height={200}
+                           class="blog-post__cover-image"
+                        />
+                     ) : null}
+                  </div>
+                  <div class="blog-post__detail">
+                     <a href={`/blog/${post.slug}`} class="blog-post__link">
+                        {post.data.title}
+                     </a>
+                     <span class="blog-post__meta">
+                        Published on {post.data.date.toLocaleDateString()}
+                     </span>
+                     <p class="blog-post__summary">{post.data.summary}</p>
+                  </div>
+               </div>
+            ))
+         }
+      </div>
+   </div>
+</Layout>
+
+<style>
+   .blog-index {
+      padding: 4rem;
+      font-family: sans-serif;
+      color: #555;
+   }
+
+   .blog-index__title {
+      font-size: 3rem;
+      margin-bottom: 0rem;
+   }
+
+   .blog-index__lead {
+      font-size: 1.5rem;
+      margin-top: 0.5rem;
+      margin-bottom: 2rem;
+   }
+
+   .blog-post {
+      margin: 1rem 0;
+      border-bottom: 1px solid #ddd;
+      padding: 1rem 0 2rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+   }
+
+   .blog-post:last-child {
+      border-bottom: none;
+   }
+
+   .blog-post__meta {
+      display: block;
+      font-size: 0.875em;
+      color: #999;
+   }
+
+   .blog-post__cover {
+      width: 320px;
+      border-radius: 0.25rem;
+      background: #eee;
+   }
+
+   .blog-post__cover-image {
+      height: auto;
+      border-radius: 0.25rem;
+   }
+
+   .blog-post__detail {
+      margin: 1rem 2rem;
+   }
+
+   .blog-post__link {
+      display: inline-block;
+      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+
+      text-decoration: underline;
+      color: #155dfc;
+   }
+
+   .blog-post__summary {
+      margin: 1rem 0;
+   }
+</style>
