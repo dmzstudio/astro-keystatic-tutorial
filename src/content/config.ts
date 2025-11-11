@@ -1,4 +1,4 @@
-// src/content/content.config.ts
+// src/content/config.ts
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
@@ -21,7 +21,7 @@ const pages = defineCollection({
    }),
 });
 
-export const colllections = {
+export const collections = {
    posts,
    pages,
 };
