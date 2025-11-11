@@ -6,10 +6,21 @@ import keystatic from "@keystatic/astro";
 
 // works reliably in Bun, Node, Vite, etc.
 const isDev = import.meta.env.DEV;
-const isProd = import.meta.env.PROD;
+const isBuild = import.meta.env.PROD;
 
 // https://astro.build/config
 export default defineConfig({
-   output: "static", // <- tells Astro to build a static HTML
-   integrations: [react(), markdoc(), ...(isDev ? [keystatic()] : [])],
+   integrations: [react(), markdoc(), ...(isBuild ? [] : [keystatic()])],
+   vite: {
+      build: {
+         rollupOptions: {
+            // include content images as static assets
+            input: ["src/content/posts/**/*.{jpg, jpeg, png, webp, svg}"],
+         },
+      },
+      assetsInclude: [
+         "**/src/content/posts/**/*.{jpg, jpeg, png, webp, svg}",
+         "**/src/content/pages/**/*.{jpg, jpeg, png, webp, svg}",
+      ],
+   },
 });
