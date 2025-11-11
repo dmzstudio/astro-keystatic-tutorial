@@ -23,13 +23,13 @@ const allPosts = await getCollection("posts");
                            src={post.data.cover}
                            alt={post.data.title}
                            width={320}
-                           height={200}
+                           height={180}
                            class="blog-post__cover-image"
                         />
                      ) : null}
                   </div>
                   <div class="blog-post__detail">
-                     <a href={`/blog/${post.slug}`} class="blog-post__link">
+                     <a href={`/blog/${post.id}`} class="blog-post__link">
                         {post.data.title}
                      </a>
                      <span class="blog-post__meta">

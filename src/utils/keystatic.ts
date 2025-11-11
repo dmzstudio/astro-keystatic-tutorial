@@ -1,3 +1,4 @@
+// src/utils/keystatic.ts
 import { createReader } from "@keystatic/core/reader";
 import keystaticConfig from "../../keystatic.config";
 

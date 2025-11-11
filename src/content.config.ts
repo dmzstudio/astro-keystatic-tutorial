@@ -1,6 +1,6 @@
 // src/content/config.ts
 import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
+import { glob, file } from "astro/loaders";
 
 const posts = defineCollection({
    loader: glob({ pattern: "**/*.mdoc", base: "./src/content/posts" }),

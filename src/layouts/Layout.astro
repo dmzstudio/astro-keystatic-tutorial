@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-const isDev = import.meta.env.MODE === "development";
+const isDev = import.meta.env.DEV;
 const { title } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
